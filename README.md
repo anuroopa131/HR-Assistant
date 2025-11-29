@@ -19,8 +19,7 @@ The assistant uses local LLMs via Ollama, FAISS/Chroma vector search, and a full
 
 
 # Installation Guide
-
-## 1. Clone the Repository
+1. Clone the Repository
 
 ```bash
 git clone https://github.com/anuroopa131/HR-Assistant.git
@@ -30,8 +29,7 @@ cd HR-Assistant
 ---
 
 # Backend Setup (Django)
-
-## 2. Create & Activate Virtual Environment
+ 2. Create & Activate Virtual Environment
 
 ```bash
 python -m venv venv
@@ -119,4 +117,62 @@ https://drive.google.com/file/d/1AW2GNrn7SQL4XdryeZsgW8reZuKCyoRl/view?usp=shari
 - Document version history.   
 - OCR for scanned PDFs.  
 - Cloud deployment.
+
+Architecture Diagram:
+
+                   ┌───────────────────────────────────────────┐
+                   │                 FRONTEND                  │
+                   │                (React UI)                 │
+                   │───────────────────────────────────────────│
+                   │ • HR/Admin uploads documents              │
+                   │ • User asks a question                    │
+                   │ • Sends requests to Django API            │
+                   └───────────────────────────────────────────┘
+                                      │
+                                      ▼
+                   ┌───────────────────────────────────────────┐
+                   │              BACKEND (Django)             │
+                   │───────────────────────────────────────────│
+                   │ 1. Receives documents                     │
+                   │ 2. Extracts text (PDF/Text processing)    │
+                   │ 3. Splits into chunks                     │
+                   │ 4. Generates embeddings                   │
+                   │ 5. Stores vectors in FAISS/ChromaDB       │
+                   │ 6. Receives user query                    │
+                   │ 7. Converts query → embedding             │
+                   └───────────────────────────────────────────┘
+                                        │
+                                        ▼
+                   ┌───────────────────────────────────────────┐
+                   │             VECTOR DATABASE               │
+                   │            (FAISS / ChromaDB)             │
+                   │───────────────────────────────────────────│
+                   │ • Stores embeddings for each client       │
+                   │ • Performs similarity search              │
+                   │ • Returns top-K relevant chunks           │
+                   └───────────────────────────────────────────┘
+                                        │
+                                        ▼
+                   ┌───────────────────────────────────────────┐
+                   │            RETRIEVER + RAG PIPELINE       │
+                   │───────────────────────────────────────────│
+                   │      Combines query + retrieved chunks    │
+                   │         Prepares prompt for LLM           │
+                   └───────────────────────────────────────────┘
+                                         │
+                                         ▼
+                   ┌───────────────────────────────────────────┐
+                   │                 OLLAMA LLM                │
+                   │               (Llama 3.2B)                │
+                   │───────────────────────────────────────────│
+                   │           Generates final answer          │
+                   │          LLM runs locally on CPU/GPU      │
+                   └───────────────────────────────────────────┘
+                                         │
+                                         ▼
+                   ┌───────────────────────────────────────────┐
+                   │                 FRONTEND                  │
+                   │───────────────────────────────────────────│
+                   │         Displays answer to user           │
+                   └───────────────────────────────────────────┘
 
