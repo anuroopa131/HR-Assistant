@@ -54,7 +54,7 @@ def get_top_chunks(query, company_name, client_name, top_k=TOP_K):
     index_dir = os.path.join(settings.BASE_DIR, "media", "faiss_indexes", company_name, client_name)
     print(f"[DEBUG] Looking for index at: {index_dir}")
     index_path = os.path.join(index_dir, "index.faiss")
-    chunks_path = os.path.join(index_dir, "metadata.pkl")  # ✅ FIXED HERE
+    chunks_path = os.path.join(index_dir, "metadata.pkl")  
 
     if not os.path.exists(index_path) or not os.path.exists(chunks_path):
         print(f"[ERROR] No index found at {index_dir}")
@@ -90,7 +90,7 @@ Answer:"""
 def ask_ollama(prompt):
     try:
         result = subprocess.run(
-            ["ollama", "run", "llama3:latest"],
+           ["ollama", "run", "llama3.2:1b"],
             input=prompt.encode(),
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,

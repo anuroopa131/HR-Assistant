@@ -1,14 +1,17 @@
 {% extends 'layout.html' %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles.css' %}">
 
-{% block title %}
-    Register a New User
-{% endblock %}
+
+{% block title %}Register a New User{% endblock %}
 
 {% block content %}
+<div class="form-container">
     <h1>Register a New User</h1>
     <form class="form-with-validation" action="{% url 'clients:register' %}" method="post">
         {% csrf_token %}
-        {{ form }}
-        <button class="form-submit">Submit</button>
+        {{ form.as_p }}
+        <button class="form-submit">Register</button>
     </form>
+</div>
 {% endblock %}

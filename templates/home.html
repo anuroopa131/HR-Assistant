@@ -1,16 +1,21 @@
-{% extends "layout.html" %}
+{% extends 'layout.html' %}
 
 {% block title %}
     Home
 {% endblock %}
 
 {% block content %}
-    <p>
-        for login <a href="{% url 'clients:login' %}">login</a>
-    </p>
-    <p>For registration <a href="{% url 'clients:register' %}">click here</a></p>
+<div class="cards-container">
+    <div class="card">
+        <h2>Login</h2>
+        <p>Already have an account?</p>
+        <a class="card-button" href="{% url 'clients:login' %}">Login</a>
+    </div>
+
+    <div class="card">
+        <h2>Register</h2>
+        <p>New here? Create an account</p>
+        <a class="card-button" href="{% url 'clients:register' %}">Register</a>
+    </div>
+</div>
 {% endblock %}
-
-
-
-

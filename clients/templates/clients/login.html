@@ -1,15 +1,17 @@
 {% extends 'layout.html' %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'styles.css' %}">
 
-{% block title %}
-    Client Login
-{% endblock %}
+{% block title %}Client Login{% endblock %}
 
 {% block content %}
+<div class="form-container">
     <h1>Client Login</h1>
     <form class="form-with-validation" action="{% url 'clients:login' %}" method="post">
         {% csrf_token %}
-        {{ form }}
-        <input type="hidden" name="posts" value="{% url 'posts:list' %}" />
-        <button class="form-submit">Submit</button>
+        {{ form.as_p }}
+        <input type="hidden" name="posts" value="{% url 'posts:list' %}" class="hidden-input" />
+        <button class="form-submit">Login</button>
     </form>
+</div>
 {% endblock %}

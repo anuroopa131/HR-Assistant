@@ -118,7 +118,8 @@ const ChatInterface = ({ onClose, hideWidget }) => {
 
     setTimeout(() => {
       setMessages([{
-        text: "Hello! I'm your company assistant. You can ask me anything about our products, services, or company information. How can I help you today?",
+        text: "Hello! I'm your HR assistant. You can ask me anything related to company policies, benefits, recruitment, onboarding, employee support, or general HR information. How can I assist you today?",
+
         isBot: true,
       }]);
       setIsTyping(false);
@@ -152,10 +153,11 @@ const ChatInterface = ({ onClose, hideWidget }) => {
                 src={animationData}
                 style={{ width: '200px', height: '200px' }}
               />
-              <h3 className="welcome-title">Hello! I'm your Company ChatBot</h3>
-              <p className="welcome-text">
-                I can help answer any questions you have about our company, products, or services.
-              </p>
+              <h3 className="welcome-title">Hello! I'm your HR Assistant</h3>
+<p className="welcome-text">
+  I’m here to help with questions about HR policies, benefits, recruitment, onboarding, or any employee-related information.
+</p>
+
               <button
                 onClick={handleGetStarted}
                 className="get-started-button"

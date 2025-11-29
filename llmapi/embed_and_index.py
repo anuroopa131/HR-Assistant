@@ -18,6 +18,7 @@ def normalize_client_folder_name(name):
 def extract_tables_from_pdf(filepath):
     try:
         tables = camelot.read_pdf(filepath, pages='all', flavor='lattice')
+        
         if tables:
             all_tables_text = []
             for table in tables:
@@ -144,12 +145,9 @@ def build_index_incremental(documents_folder, company_name, client_name):
 
     print(f"[DONE] Index ready for {company_name} → {client_name} with {len(metadata)} total chunks.")
 
-# ------------------------------------------------------
-# 🔁 Auto-index all clients under the given company name
-# ------------------------------------------------------
 if __name__ == "__main__":
     sys.path.append(BASE_DIR)
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')  # ✅ Update if needed
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')  
     django.setup()
 
     from clients.models import Company, Client
